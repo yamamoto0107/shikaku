@@ -43,14 +43,20 @@ class Main(QWidget):
         self.setLayout(self.layout4)
         self.layout4.addRow("答え合わせする問題数を教えて下さい。", self.line1)
         self.layout4.addRow("正解ファイルを選択してください。", self.button)
+        self.layout4.addRow(self.label1)
         self.layout4.addRow("回答ファイルを選択してください。", self.button1)
+        self.layout4.addRow(self.label2)
         self.layout4.addRow("回答開始行を教えて下さい。", self.line2)
         self.layout4.addRow("回答の書かれた列を教えて下さい。", self.line3)
-        self.layout4.addRow(self.label)
+        self.layout4.addRow(self.label0)
     def label(self):
-        self.label = QtWidgets.QLabel(self)
-        self.label.setFont(QtGui.QFont("Arial", 24))
-        self.label.setText("各データを入力してください。")
+        self.label0 = QtWidgets.QLabel(self)
+        self.label1 = QtWidgets.QLabel(self)
+        self.label2 = QtWidgets.QLabel(self)
+        self.label0.setFont(QtGui.QFont("Arial", 24))
+        self.label1.setText("\t\t\t\t上のボタンから正解のエクセルファイルを選択してください")
+        self.label2.setText("\t\t\t\t上のボタンから学生のエクセルファイルを選択してください")
+        self.label0.setText("各データを入力してください。")
     def line(self):
         self.line1 = QtWidgets.QLineEdit(self)
         self.line1.setFixedWidth(150)
@@ -76,10 +82,12 @@ class Main(QWidget):
 
     def dialog_test(self):
         self.file0,_ = QFileDialog.getOpenFileName()
+        self.label1.setText(self.file0+"が選択されました")
     def dialog_test1(self):
         self.file1,_ = QFileDialog.getOpenFileName()
+        self.label2.setText(self.file1+"が選択されました")
         test=self.checker(self.file0,self.file1,self.file1,int(self.line1.text()),int(self.line2.text()),int(self.line3.text()))
-        self.label.setText("入力を確認しました。"+test+"ファイルに記入しましたので返却してください")
+        self.label0.setText("入力を確認しました。"+test+"ファイルに記入しましたので返却してください")
 
     def checker(self,ch,ans,save,row,start,col):
         try:
