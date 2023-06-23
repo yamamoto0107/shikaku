@@ -14,10 +14,7 @@
 """
 import openpyxl as xl
 
-def checker2(x,y):
-    for i in range(len(x.value)):
-        for j in range(len(y.value)):
-            if x.value[i] == y.value[j]
+
 
 def checker(ch,ans,save,row,start,col):
     try:
@@ -26,10 +23,17 @@ def checker(ch,ans,save,row,start,col):
         ws1 = wb1.worksheets[0]
         ws2 = wb2.worksheets[0]
         for i in range(row):
-            cell1 = ws1.cell(row+start,col)
-            cell2 = ws2.cell(row+start,col)
-            checker2(cell1,cell2)
-
+            z=i+start
+            cell1 = ws1.cell(z,col)
+            cell2 = ws2.cell(z,col)
+            for i in range(len(cell1.value)):
+                for j in range(len(cell2.value)):
+                    if cell1.value[i] == cell2.value[j]:
+                        print(cell2.value[i],"○")
+                        cell2.cell(row+start,col+1,"○")
+                    else:
+                        ws2.cell(row+start,col+1,cell2.value[i])
+        wb2.save(save)
 
         return 1
     except Exception as e:
