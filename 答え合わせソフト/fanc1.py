@@ -54,8 +54,10 @@ class Main(QWidget):
         self.label1 = QtWidgets.QLabel(self)
         self.label2 = QtWidgets.QLabel(self)
         self.label0.setFont(QtGui.QFont("Arial", 24))
-        self.label1.setText("\t\t\t\t上のボタンから正解のエクセルファイルを選択してください")
-        self.label2.setText("\t\t\t\t上のボタンから学生のエクセルファイルを選択してください")
+        self.label1.setFont(QtGui.QFont("Arial", 14))
+        self.label2.setFont(QtGui.QFont("Arial", 14))
+        self.label1.setText("\t\t上のボタンから正解のエクセルファイルを選択してください")
+        self.label2.setText("\t\t上のボタンから学生のエクセルファイルを選択してください")
         self.label0.setText("各データを入力してください。")
     def line(self):
         self.line1 = QtWidgets.QLineEdit(self)
@@ -87,7 +89,8 @@ class Main(QWidget):
         self.file1,_ = QFileDialog.getOpenFileName()
         self.label2.setText(self.file1+"が選択されました")
         test=self.checker(self.file0,self.file1,self.file1,int(self.line1.text()),int(self.line2.text()),int(self.line3.text()))
-        self.label0.setText("入力を確認しました。"+test+"ファイルに記入しましたので返却してください")
+        text="入力を確認しました。"+self.parsent+"ファイルに記入しましたので返却してください"
+        self.label0.setText(text)
 
     def checker(self,ch,ans,save,row,start,col):
         try:
@@ -108,11 +111,14 @@ class Main(QWidget):
                     count+=1
                 else:
                     ws2.cell(z,col+1,cell2.value)
-            parsent=str(count//countall*100)+"点でした。"
-            ws2.cell(row+1,col+1,parsent)
+            answer=count/countall*100
+            print(count,countall,int(answer))
+            answer=int(answer)
+            self.parsent=str(answer)+"点でした。"
+            ws2.cell(row+1,col+1,self.parsent)
             wb2.save(save)
 
-            return parsent
+            return self.parsent
         except Exception as e:
 
             return e
