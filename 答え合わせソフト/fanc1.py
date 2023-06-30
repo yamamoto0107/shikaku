@@ -110,7 +110,8 @@ class Main(QWidget):
                     ws2.cell(z,col+1,"○")
                     count+=1
                 else:
-                    ws2.cell(z,col+1,cell2.value)
+                    ws2.cell(z,col+1,cell1.value)
+                    print(cell1.value,cell2.value)
             answer=count/countall*100
             print(count,countall,int(answer))
             answer=int(answer)
