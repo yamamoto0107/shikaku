@@ -88,10 +88,13 @@ class Main(QWidget):
     def dialog_test1(self):
         self.file1,_ = QFileDialog.getOpenFileName()
         self.label2.setText(self.file1+"が選択されました")
-        test=self.checker(self.file0,self.file1,self.file1,int(self.line1.text()),int(self.line2.text()),int(self.line3.text()))
-        text="入力を確認しました。"+self.parsent+"ファイルに記入しましたので返却してください"
-        self.label0.setText(text)
-
+        try:
+            test=self.checker(self.file0,self.file1,self.file1,int(self.line1.text()),int(self.line2.text()),int(self.line3.text()))
+            text="入力を確認しました。"+self.parsent+"ファイルに記入しましたので返却してください"
+            self.label0.setText(text)
+        except Exception as e:
+            text="もう一度、正解ファイルと回答ファイルを上から選択しなおしてください"
+            self.label0.setText(text)
     def checker(self,ch,ans,save,row,start,col):
         try:
             wb1 = xl.load_workbook(ch)
@@ -121,7 +124,7 @@ class Main(QWidget):
 
             return self.parsent
         except Exception as e:
-
+            
             return e
 
 ch = "./答え合わせソフト/回答用紙.xlsx"
