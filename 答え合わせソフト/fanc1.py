@@ -10,7 +10,7 @@
 ・入力欄５：学生の回答問題数と回答開始行と列番号。
 ・出力欄１：処理の結果(成功か失敗か。)
 ・出力欄２：点数。
-(初期値は、20,1,2)
+(初期値は、20,2,2)
 
 ・機能１：エクセルファイルの正誤入力と保存。
 ・機能２：正答率の表示。
@@ -62,10 +62,10 @@ class Main(QWidget):
     def line(self):
         self.line1 = QtWidgets.QLineEdit(self)
         self.line1.setFixedWidth(150)
-        self.line1.setText("13")
+        self.line1.setText("20")
         self.line2 = QtWidgets.QLineEdit(self)
         self.line2.setFixedWidth(150)
-        self.line2.setText("1")
+        self.line2.setText("2")
         self.line3 = QtWidgets.QLineEdit(self)
         self.line3.setFixedWidth(150)
         self.line3.setText("2")
@@ -116,7 +116,7 @@ class Main(QWidget):
             print(count,countall,int(answer))
             answer=int(answer)
             self.parsent=str(answer)+"点でした。"
-            ws2.cell(row+1,col+1,self.parsent)
+            ws2.cell(row+2,col+1,self.parsent)
             wb2.save(save)
 
             return self.parsent
@@ -124,8 +124,8 @@ class Main(QWidget):
 
             return e
 
-ch = "C:/Users/yyama/Downloads/shikaku/答え合わせソフト/FE_0623ans.xlsx"
-ans = "C:/Users/yyama/Downloads/shikaku/答え合わせソフト/FE_0623.xlsx"
+ch = "./答え合わせソフト/回答用紙.xlsx"
+ans = "./答え合わせソフト/正解データ.xlsx"
 
 if __name__ == "__main__":
     #正解、回答、出力先、問題数、開始行、回答列
